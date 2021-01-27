@@ -1,0 +1,51 @@
+plugins {
+    id 'java'
+    id 'org.jetbrains.intellij' version '0.6.5'
+    //id ("org.jetbrains.grammarkit" )version "2020.3.2"
+}
+
+group 'org.example'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'org.jetbrains.intellij'
+
+repositories {
+    mavenCentral()
+}
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
+    compile "org.antlr:antlr4-intellij-adaptor:0.1"
+    compile fileTree(dir: '/Applications/IntelliJ IDEA CE.app/Contents/lib ', includes: ['*.jar'])
+}
+//grammarKit {
+//    // version of IntelliJ patched JFlex (see bintray link below), Default is 1.7.0-1
+//    jflexRelease = '1.7.0-1'
+//
+//    // tag or short commit hash of Grammar-Kit to use (see link below). Default is 2020.3.1
+//    grammarKitRelease = '6452fde524'
+//}
+task copyDependencies(type: Copy) {
+    from configurations.runtimeClasspath
+    into "build/dependencies"
+}
+
+jar {
+    dependsOn('copyDependencies')
+    destinationDirectory = file("build/libs")
+}
+intellij {
+    version '2020.3.1'
+    plugins = ['com.intellij.java']
+}
+/*runIde {
+
+}*/
+/*patchPluginXml {
+    changeNotes """
+      Add change notes here.<br>
+      <em>most HTML tags may be used</em>"""
+}*/
+test {
+    useJUnitPlatform()
+}

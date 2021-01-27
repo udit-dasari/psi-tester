@@ -1,0 +1,10 @@
+<application>
+  <component name="EventLogWhitelist">
+    <update recorder-id="FUS" last-modified="1611767509000" />
+    <options recorder-id="FUS">
+      <option name="dataThreshold" value="24000" />
+      <option name="groupAlertThreshold" value="6000" />
+      <option name="groupDataThreshold" value="12000" />
+    </options>
+  </component>
+</application>
